@@ -20,6 +20,13 @@ public class GerenciadorDePaginação {
         Manipular arquivoProcesso = new Manipular();
         
         ArrayList<Processo> processos = arquivoProcesso.lerArquivo("processo.txt");
+        MemoriaFisica memoriaFisica = new MemoriaFisica();
+        MemoriaVirtual memoriaVirtual = new MemoriaVirtual();
+        
+        memoriaVirtual.inicializar(4);   // tamanho do bloco
+        memoriaFisica.inicializar(4);   // tamanho do bloco
+        
+        
     }
     
 }

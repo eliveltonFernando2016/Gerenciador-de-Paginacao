@@ -15,11 +15,32 @@ public class Processo {
     private int idProcesso;
     private int tamProcesso;
     private ArrayList<Integer> paginas = new ArrayList();
+    private MemoriaVirtual memoriaVirtual = new MemoriaVirtual();
 
     public Processo(int idProcesso, int tamProcesso) {
         this.idProcesso = idProcesso;
         this.tamProcesso = tamProcesso;
     }
+    
+    private void inicializar(){
+        MemoriaVirtual memoriaVirtual = new MemoriaVirtual();
+        memoriaVirtual.preencherMemoria(this);
+    }
+
+    public MemoriaVirtual getMemoriaVirtual() {
+        return memoriaVirtual;
+    }
+
+    public void setMemoriaVirtual(MemoriaVirtual memoriaVirtual) {
+        this.memoriaVirtual = memoriaVirtual;
+    }
+    
+    
+    
+    public void memoriaVirtual(){
+    }
+    
+    
 
     public int getIdProcesso() {
         return idProcesso;
@@ -44,4 +65,10 @@ public class Processo {
     public void setPaginas(ArrayList<Integer> paginas)  {
         this.paginas = paginas;
     }
+    
+    public void jogarMemoriaFisica(){
+        
+    }
+    
+    
 }

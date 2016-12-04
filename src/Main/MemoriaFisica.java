@@ -12,9 +12,16 @@ import java.util.ArrayList;
  * @author elivelton
  */
 public class MemoriaFisica {
+    
     private ArrayList<Endereco> memoria = new ArrayList();
+    private int tamBloco;
     private int idPagina;
 
+    public void inicializar(int x){
+        tamBloco = x;
+    }
+    
+    
     public ArrayList<Endereco> getMemoria() {
         return memoria;
     }

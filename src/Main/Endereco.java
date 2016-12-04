@@ -12,7 +12,9 @@ package Main;
 public class Endereco {
     private int idEndereco;
     private int idProcesso;
-
+    
+    private int enderecoFisicoInicial = 4000;
+    
     public int getIdEndereco() {
         return idEndereco;
     }
@@ -28,6 +30,12 @@ public class Endereco {
     public void setIdProcesso(int idProcesso) {
         this.idProcesso = idProcesso;
     }
+
+    public Endereco(int idEndereco, int idProcesso) {
+        this.idEndereco = idEndereco;
+        this.idProcesso = idProcesso;
+    }
+    
     
     
 }

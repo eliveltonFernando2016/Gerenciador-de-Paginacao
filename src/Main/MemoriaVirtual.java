@@ -12,9 +12,20 @@ import java.util.ArrayList;
  * @author elivelton
  */
 public class MemoriaVirtual {
+
     private ArrayList<Endereco> listaEndereco = new ArrayList();
     private int tamVetor;
+    private int tamBloco;
+    private Processo p;
 
+    public MemoriaVirtual() {
+    }
+
+
+    public void inicializar(int x){
+        tamBloco = x;
+    }
+    
     public MemoriaVirtual(int tamVetor) {
         this.tamVetor = tamVetor;
     }
@@ -33,5 +44,12 @@ public class MemoriaVirtual {
 
     public void setTamVetor(int tamVetor) {
         this.tamVetor = tamVetor;
+    }
+    
+    public void preencherMemoria(Processo p){
+        for (int i = 0; i < this.tamVetor; i++) {
+            Endereco endereco = new Endereco(i,p.getIdProcesso());
+            p.getMemoriaVirtual().listaEndereco.add(endereco);
+        }
     }
 }
