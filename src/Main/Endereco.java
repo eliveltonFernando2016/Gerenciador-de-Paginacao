@@ -13,7 +13,6 @@ public class Endereco {
     private int idEndereco;
     private int idProcesso;
     
-    private int enderecoFisicoInicial = 4000;
     
     public int getIdEndereco() {
         return idEndereco;

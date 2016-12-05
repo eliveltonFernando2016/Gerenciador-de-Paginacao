@@ -46,16 +46,4 @@ public class Processo {
         this.paginas = paginas;
     }
 
-    public void executar() {
-        MemoriaFisica memoriaFisica = new MemoriaFisica();
-        MemoriaVirtual memoriaVirtual = new MemoriaVirtual();
-
-        if (memoriaFisica.getBlocosLivres() >= this.tamProcesso / memoriaFisica.getTamBloco()) {
-            memoriaFisica.adicionarProcesso();
-        } else {
-            memoriaVirtual.adicionarProcesso();
-        }
-        
-    }
-
 }

@@ -5,63 +5,48 @@
  */
 package Main;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author elivelton
  */
 public class MemoriaVirtual {
+    
+    private HashMap<Integer, Pagina> memoriaVirtual;
+    private int tamanho;
+    private int endereco = 0;
+    private int tamPagina;
 
-    private ArrayList<Endereco> memoriaVirtual = new ArrayList();
-    private int tamVetor;
-    private int blocosLivres;
-    private int tamBloco;
-    private Processo p;
-
-    public MemoriaVirtual() {
-    }
-
-    public void inicializar(int x, int y) {
-        tamBloco = x;
-        blocosLivres = y;
+    public MemoriaVirtual(int tamanho, int tamPagina){
+        this.tamPagina = tamPagina;
+        this.tamanho = tamanho;
+        memoriaVirtual = new HashMap<Integer, Pagina>(this.tamanho);
     }
     
-    public int getBlocosLivres() {
-        return blocosLivres;
+    public boolean alocarProcesso(Processo p) {
+
+        if (memoriaVirtual.size() < this.tamanho + p.getTamProcesso()) {
+            for (int i = 0; i < p.getTamProcesso(); i++) {
+                
+                Pagina pagina = new Pagina(tamPagina);
+
+                for (int j = 0; j < this.tamPagina; j++) {
+                    Endereco enderecoPagina = new Endereco(endereco,p.getIdProcesso());
+                    endereco++;
+                }
+
+                memoriaVirtual.put(endereco, pagina);
+                p.getPaginas().add(pagina.getId());
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void setBlocosLivres(int blocosLivres) {
-        this.blocosLivres = blocosLivres;
-    }
-
-    public int getTamBloco() {
-        return tamBloco;
-    }
-
-    public MemoriaVirtual(int tamVetor) {
-        this.tamVetor = tamVetor;
-    }
-
-    public ArrayList<Endereco> getListaEndereco() {
-        return memoriaVirtual;
-    }
-
-    public void setListaEndereco(ArrayList<Endereco> listaEndereco) {
-        this.memoriaVirtual = listaEndereco;
-    }
-
-    public int getTamVetor() {
-        return tamVetor;
-    }
-
-    public void setTamVetor(int tamVetor) {
-        this.tamVetor = tamVetor;
+    public boolean removerProcesso(Processo p){
+        return true;
     }
     
-    public void adicionarProcesso(){
-        
-    }
-    
-
 }

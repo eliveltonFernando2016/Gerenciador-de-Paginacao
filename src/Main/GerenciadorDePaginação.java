@@ -18,13 +18,24 @@ public class GerenciadorDePaginação {
      */
     public static void main(String[] args) {
         Manipular arquivoProcesso = new Manipular();
-        
+
         ArrayList<Processo> processos = arquivoProcesso.lerArquivo("processo.txt");
-        MemoriaFisica memoriaFisica = new MemoriaFisica();
-        MemoriaVirtual memoriaVirtual = new MemoriaVirtual();
         
-        memoriaVirtual.inicializar(4,24);   // tamanho do bloco
-        memoriaFisica.inicializar(4,24);   // tamanho do bloco
+        
+            
+        int tamanhoPagina = 4;
+        
+        MemoriaFisica mFisica = new MemoriaFisica(40,tamanhoPagina);
+        MemoriaVirtual mVirtual = new MemoriaVirtual(80,tamanhoPagina);
+        
+        for (int i = 0; i < processos.size(); i++) {
+            if (!mFisica.alocarProcesso(processos.get(i))) {
+                if (!mVirtual.alocarProcesso(processos.get(i))) {
+                    
+                }
+            }
+        }
+
         
     }
     

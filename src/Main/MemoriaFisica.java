@@ -5,7 +5,7 @@
  */
 package Main;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -13,48 +13,51 @@ import java.util.ArrayList;
  */
 public class MemoriaFisica {
 
-    private ArrayList<Endereco> memoria = new ArrayList();
-    private int tamBloco;
-    private int blocosLivres;
-    private int idPagina;
+    private HashMap<Integer, Pagina> memoriaFisica;
+    private int tamanho;
+    private int endereco = 4000;
+    private int tamPagina;
 
-     public void inicializar(int x,int y){
-        tamBloco = x;
-        blocosLivres = y;
+    public MemoriaFisica(int tamanho, int tamPagina) {
+        this.tamanho = tamanho;
+        this.tamPagina = tamPagina;
+        memoriaFisica = new HashMap<Integer, Pagina>(this.tamanho);
     }
 
-    public int getBlocosLivres() {
-        return blocosLivres;
+    public int getTamanho() {
+        return tamanho;
     }
 
-    public void setBlocosLivres(int blocosLivres) {
-        this.blocosLivres = blocosLivres;
-    }
-     
-     
-
-    public ArrayList<Endereco> getMemoria() {
-        return memoria;
+    public void setTamanho(int tamanho) {
+        this.tamanho = tamanho;
     }
 
-    public void setMemoria(ArrayList<Endereco> memoria) {
-        this.memoria = memoria;
+    public int getEndereco() {
+        return endereco;
     }
 
-    public int getIdPagina() {
-        return idPagina;
+    public void setEndereco(int endereco) {
+        this.endereco = endereco;
     }
 
-    public void setIdPagina(int idPagina) {
-        this.idPagina = idPagina;
-    }
+    public boolean alocarProcesso(Processo p) {
 
-    public int getTamBloco() {
-        return tamBloco;
-    }
-    
-    public void adicionarProcesso(){
-        
-    }
+        if (memoriaFisica.size() < this.tamanho + p.getTamProcesso()) {
+            for (int i = 0; i < p.getTamProcesso(); i++) {
 
+                Pagina pagina = new Pagina(tamPagina);
+
+                for (int j = 0; j < this.tamPagina; j++) {
+                    Endereco enderecoPagina = new Endereco(endereco, p.getIdProcesso());
+                    endereco++;
+                }
+
+                memoriaFisica.put(endereco, pagina);
+                p.getPaginas().add(pagina.getId());
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
