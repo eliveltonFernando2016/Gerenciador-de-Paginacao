@@ -13,29 +13,42 @@ import java.util.ArrayList;
  */
 public class MemoriaVirtual {
 
-    private ArrayList<Endereco> listaEndereco = new ArrayList();
+    private ArrayList<Endereco> memoriaVirtual = new ArrayList();
     private int tamVetor;
+    private int blocosLivres;
     private int tamBloco;
     private Processo p;
 
     public MemoriaVirtual() {
     }
 
-
-    public void inicializar(int x){
+    public void inicializar(int x, int y) {
         tamBloco = x;
+        blocosLivres = y;
     }
     
+    public int getBlocosLivres() {
+        return blocosLivres;
+    }
+
+    public void setBlocosLivres(int blocosLivres) {
+        this.blocosLivres = blocosLivres;
+    }
+
+    public int getTamBloco() {
+        return tamBloco;
+    }
+
     public MemoriaVirtual(int tamVetor) {
         this.tamVetor = tamVetor;
     }
 
     public ArrayList<Endereco> getListaEndereco() {
-        return listaEndereco;
+        return memoriaVirtual;
     }
 
     public void setListaEndereco(ArrayList<Endereco> listaEndereco) {
-        this.listaEndereco = listaEndereco;
+        this.memoriaVirtual = listaEndereco;
     }
 
     public int getTamVetor() {
@@ -46,10 +59,9 @@ public class MemoriaVirtual {
         this.tamVetor = tamVetor;
     }
     
-    public void preencherMemoria(Processo p){
-        for (int i = 0; i < this.tamVetor; i++) {
-            Endereco endereco = new Endereco(i,p.getIdProcesso());
-            p.getMemoriaVirtual().listaEndereco.add(endereco);
-        }
+    public void adicionarProcesso(){
+        
     }
+    
+
 }

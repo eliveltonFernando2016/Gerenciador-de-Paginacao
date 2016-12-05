@@ -23,9 +23,8 @@ public class GerenciadorDePaginação {
         MemoriaFisica memoriaFisica = new MemoriaFisica();
         MemoriaVirtual memoriaVirtual = new MemoriaVirtual();
         
-        memoriaVirtual.inicializar(4);   // tamanho do bloco
-        memoriaFisica.inicializar(4);   // tamanho do bloco
-        
+        memoriaVirtual.inicializar(4,24);   // tamanho do bloco
+        memoriaFisica.inicializar(4,24);   // tamanho do bloco
         
     }
     

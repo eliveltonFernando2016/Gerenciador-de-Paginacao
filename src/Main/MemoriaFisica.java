@@ -12,16 +12,27 @@ import java.util.ArrayList;
  * @author elivelton
  */
 public class MemoriaFisica {
-    
+
     private ArrayList<Endereco> memoria = new ArrayList();
     private int tamBloco;
+    private int blocosLivres;
     private int idPagina;
 
-    public void inicializar(int x){
+     public void inicializar(int x,int y){
         tamBloco = x;
+        blocosLivres = y;
     }
-    
-    
+
+    public int getBlocosLivres() {
+        return blocosLivres;
+    }
+
+    public void setBlocosLivres(int blocosLivres) {
+        this.blocosLivres = blocosLivres;
+    }
+     
+     
+
     public ArrayList<Endereco> getMemoria() {
         return memoria;
     }
@@ -37,4 +48,13 @@ public class MemoriaFisica {
     public void setIdPagina(int idPagina) {
         this.idPagina = idPagina;
     }
+
+    public int getTamBloco() {
+        return tamBloco;
+    }
+    
+    public void adicionarProcesso(){
+        
+    }
+
 }
