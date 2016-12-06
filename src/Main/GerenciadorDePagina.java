@@ -26,7 +26,9 @@ public class GerenciadorDePagina {
     public LinkedList<String> mapearPagina(int numeroDaPagina, MemoriaFisica memoriaFisica) {
 
         LinkedList<String> listaDados = new LinkedList<String>();
+        
         int x=0;
+        
         if (tabelaPagina.get(numeroDaPagina) == null) {
 
             listaDados.add("Page Fault");
@@ -34,11 +36,11 @@ public class GerenciadorDePagina {
             x = memoriaFisica.getFrameLivre();
             tabelaPagina.set(numeroDaPagina, x);
 
-            listaDados.add("Página " + numeroDaPagina + " carregada na Memória Física na posição " + x);
+            listaDados.add("Página [" + numeroDaPagina + "] carregada na Memória Física na posição [" + x+"]");
             
         } else {
             
-            listaDados.add("Página " + numeroDaPagina + " já está carregada na memória");
+            listaDados.add("Página [" + numeroDaPagina + "] já está carregada na memória");
         
         }
         String string = (x+"");

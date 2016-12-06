@@ -236,13 +236,24 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tamMemoriaActionPerformed
 
     private void botaoStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoStartActionPerformed
+        
+        sizePagina = Integer.parseInt(tamPagina.getText());
+        sizeMemoria = Integer.parseInt(tamMemoria.getText());
+        
         if (tamMemoria.getText().length() == 0 || tamPagina.getText().length() == 0) {
             JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios!");
             return;
         }
-        sizePagina = Integer.parseInt(tamPagina.getText());
-        sizeMemoria = Integer.parseInt(tamMemoria.getText());
-
+        
+        if (sizePagina > sizeMemoria) {
+            JOptionPane.showMessageDialog(null, "Tamanho da Página ou Tamanho da Memória Inválido!");
+            return;
+        }
+        
+        textArea.setText("");
+        textArea.append("Tamanho da Página: "+sizePagina+ "\nTamanho da Memória: "+sizeMemoria + "\nQuantidade de Frames: "+sizeMemoria/sizePagina+"\n\n");
+        
+        
         GerenciadorDePagina gerenciadorDePagina = new GerenciadorDePagina(sizeMemoria / sizePagina);
         MemoriaFisica memoriaFisica = new MemoriaFisica(sizeMemoria / sizePagina);
         int indice = 0;
@@ -250,22 +261,34 @@ public class Principal extends javax.swing.JFrame {
         LinkedList<String> linkedList = new LinkedList<>();
 
         for (int i = 0; i < listaEndereco.size(); i++) {
+            if (listaEndereco.get(i) > sizeMemoria) {
+                textArea.append("\n\nErro na alocação do endereço "+listaEndereco.get(i));
+                return;
+            }
+            
+        }
+        
+        
+        for (int i = 0; i < listaEndereco.size(); i++) {
             linkedList.clear();
+            
+            
             linkedList = gerenciadorDePagina.mapearPagina(listaEndereco.get(i) / sizePagina, memoriaFisica);
 
             textArea.append("-> Endereço: " + listaEndereco.get(i) + "\n");
-            
-            for (int j = 0; j < linkedList.size() - 1 ; j++) {
+
+            for (int j = 0; j < linkedList.size() - 1; j++) {
                 textArea.append(linkedList.get(j));
                 textArea.append("\n");
             }
-            
+
             indice = Integer.parseInt(linkedList.getLast());
             calculoMemFisica = (indice * sizePagina) + (listaEndereco.get(i) % sizePagina);
-            
-            textArea.append("Endereço Lógico: " + listaEndereco.get(i) + " | Endereço Físico: " + calculoMemFisica); //<<<<<<<<<<
-            textArea.append("\n\n");
 
+            if (linkedList.size() == 3) {
+                textArea.append("Endereço Lógico: " + listaEndereco.get(i) + " | Endereço Físico: " + calculoMemFisica);
+            }
+            textArea.append("\n\n");
         }
 
         tamMemoria.setText(null);
