@@ -18,15 +18,8 @@ import java.util.logging.Logger;
  * @author vitor
  */
 public class Manipular {
-    
-    
-
     private LinkedList<Integer> listaEnderecos = new LinkedList<Integer>();
 
-    public Manipular(){
-    
-    }
-    
     public void lerArquivo(String caminho) {
         String endereco;
         int enderecoInt = 0;

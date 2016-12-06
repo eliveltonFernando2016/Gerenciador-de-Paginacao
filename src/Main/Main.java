@@ -5,6 +5,7 @@
  */
 package Main;
 
+import GUI.Principal;
 import GerenciarArquivo.Manipular;
 
 
@@ -20,16 +21,15 @@ public class Main {
     public void main(){
     
         Manipular manipular = new Manipular();
-        manipular.lerArquivo("teste.txt");
         
-        MemoriaFisica memoriaFisica = new MemoriaFisica(tamanhoMemoria/tamanhoPagina);
-        GerenciadorDePagina gerenciadorDePagina = new GerenciadorDePagina(tamanhoMemoria/tamanhoPagina);
+//        MemoriaFisica memoriaFisica = new MemoriaFisica(tamanhoMemoria/tamanhoPagina);
+//        GerenciadorDePagina gerenciadorDePagina = new GerenciadorDePagina(tamanhoMemoria/tamanhoPagina);
+//        
+//        //gerenciadorDePagina.mapearPagina(endereco que estiver no arquivo / tamanhoPagina, memoriaFisica);
         
-        gerenciadorDePagina.mapearPagina(endereco que estiver no arquivo / tamanhoPagina, memoriaFisica);
+        Principal principal = new Principal();
         
-        
-        
-        manipular.getListaEnderecos();
+        //manipular.getListaEnderecos();
         
     }
             
