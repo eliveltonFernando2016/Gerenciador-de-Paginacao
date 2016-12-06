@@ -19,13 +19,14 @@ import javax.swing.JOptionPane;
  * @author vitor
  */
 public class Principal extends javax.swing.JFrame {
+
     JFileChooser chooser = new JFileChooser();
     String caminho = "";
     File file = null;
     private LinkedList<Integer> listaEndereco = null;
     private int sizeMemoria;
     private int sizePagina;
-    
+
     Manipular manipular = null;
 
     /**
@@ -235,40 +236,67 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tamMemoriaActionPerformed
 
     private void botaoStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoStartActionPerformed
-        if(tamMemoria.getText().length()==0 || tamPagina.getText().length()==0){
+        if (tamMemoria.getText().length() == 0 || tamPagina.getText().length() == 0) {
             JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios!");
             return;
         }
         sizePagina = Integer.parseInt(tamPagina.getText());
         sizeMemoria = Integer.parseInt(tamMemoria.getText());
-        
-        GerenciadorDePagina gerenciadorDePagina = new GerenciadorDePagina(sizeMemoria/sizePagina);
-        MemoriaFisica memoriaFisica = new MemoriaFisica(sizeMemoria/sizePagina);
-        
+
+        GerenciadorDePagina gerenciadorDePagina = new GerenciadorDePagina(sizeMemoria / sizePagina);
+        MemoriaFisica memoriaFisica = new MemoriaFisica(sizeMemoria / sizePagina);
+        int indice = 0;
+        int calculoMemFisica = 0;
+        LinkedList<String> linkedList = new LinkedList<>();
+
+        for (int i = 0; i < listaEndereco.size(); i++) {
+            linkedList.clear();
+            linkedList = gerenciadorDePagina.mapearPagina(listaEndereco.get(i) / sizePagina, memoriaFisica);
+
+            textArea.append("-> Endereço: " + listaEndereco.get(i) + "\n");
+            
+            for (int j = 0; j < linkedList.size() - 1 ; j++) {
+                textArea.append(linkedList.get(j));
+                textArea.append("\n");
+            }
+            
+            indice = Integer.parseInt(linkedList.getLast());
+            calculoMemFisica = (indice * sizePagina) + (listaEndereco.get(i) % sizePagina);
+            
+            textArea.append("Endereço Lógico: " + listaEndereco.get(i) + " | Endereço Físico: " + calculoMemFisica); //<<<<<<<<<<
+            textArea.append("\n\n");
+
+        }
+
         tamMemoria.setText(null);
         tamPagina.setText(null);
     }//GEN-LAST:event_botaoStartActionPerformed
 
     private void botaoArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoArquivoActionPerformed
         int retorno = chooser.showSaveDialog(null);
-        if (retorno==JFileChooser.APPROVE_OPTION){
+        if (retorno == JFileChooser.APPROVE_OPTION) {
             caminho = chooser.getSelectedFile().getAbsolutePath();
         }
 
-        if(caminho != null){
+        if (caminho != null) {
             caminhoArquivo.setText(caminho);
             manipular = new Manipular();
             manipular.lerArquivo(caminho);
             listaEndereco = manipular.getListaEnderecos();
         }
-        
+
         DefaultListModel listModel = new DefaultListModel();
 
-        for(int i=0; i < listaEndereco.size(); i++){
+        for (int i = 0; i < listaEndereco.size(); i++) {
             listModel.addElement(listaEndereco.get(i).toString());
             listaProcesso.setModel(listModel);
         }
     }//GEN-LAST:event_botaoArquivoActionPerformed
+
+    public void adicionarTextField(String texto) {
+
+        textArea.append(texto);
+    }
 
     /**
      * @param args the command line arguments
@@ -304,6 +332,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoArquivo;

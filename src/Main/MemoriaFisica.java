@@ -17,12 +17,11 @@ public class MemoriaFisica {
     
     public MemoriaFisica(int tamanho){
         frames = new ArrayList<>(tamanho);
+        for (int i = 0; i < tamanho; i++) {
+            frames.add(false);
+        }
     }
 
-    MemoriaFisica() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     public boolean isLoad(int index){
         return frames.get(index);
     }
@@ -38,6 +37,7 @@ public class MemoriaFisica {
     public int getFrameLivre(){
         for (int i = 0; i < frames.size(); i++) {
             if (!isLoad(i)) {
+                load(i);
                 return i;
             }
         }

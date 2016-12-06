@@ -6,6 +6,7 @@
 package Main;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -13,25 +14,42 @@ import java.util.ArrayList;
  */
 public class GerenciadorDePagina {
 
-    ArrayList<Integer> tabelaPagina;
+    ArrayList<Integer> tabelaPagina = null;
 
     public GerenciadorDePagina(int tamanho) {
         tabelaPagina = new ArrayList<Integer>(tamanho);
+        for (int i = 0; i < tamanho; i++) {
+            tabelaPagina.add(null);
+        }
     }
 
-    GerenciadorDePagina() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public void mapearPagina(int numeroDaPagina, MemoriaFisica memoriaFisica){
-        if(tabelaPagina.get(numeroDaPagina) != null){
-            System.out.println("PageFault");
-        } 
+    public LinkedList<String> mapearPagina(int numeroDaPagina, MemoriaFisica memoriaFisica) {
+
+        LinkedList<String> listaDados = new LinkedList<String>();
+        int x=0;
+        if (tabelaPagina.get(numeroDaPagina) == null) {
+
+            listaDados.add("Page Fault");
+
+            x = memoriaFisica.getFrameLivre();
+            tabelaPagina.set(numeroDaPagina, x);
+
+            listaDados.add("Página " + numeroDaPagina + " carregada na Memória Física na posição " + x);
+            
+        } else {
+            
+            listaDados.add("Página " + numeroDaPagina + " já está carregada na memória");
         
-        int x = memoriaFisica.getFrameLivre();
+        }
+        String string = (x+"");
+        listaDados.add(string);
         
-        tabelaPagina.set(numeroDaPagina,x);
-    
+        return listaDados;
+
     }
-    
+
+    public String mandaString(String texto) {
+        return texto;
+    }
+
 }
