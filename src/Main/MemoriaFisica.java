@@ -5,59 +5,42 @@
  */
 package Main;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  *
- * @author elivelton
+ * @author vitor
  */
 public class MemoriaFisica {
 
-    private HashMap<Integer, Pagina> memoriaFisica;
-    private int tamanho;
-    private int endereco = 4000;
-    private int tamPagina;
-
-    public MemoriaFisica(int tamanho, int tamPagina) {
-        this.tamanho = tamanho;
-        this.tamPagina = tamPagina;
-        memoriaFisica = new HashMap<Integer, Pagina>(this.tamanho);
+    ArrayList<Boolean> frames;
+    
+    public MemoriaFisica(int tamanho){
+        frames = new ArrayList<>(tamanho);
     }
 
-    public int getTamanho() {
-        return tamanho;
+    MemoriaFisica() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public void setTamanho(int tamanho) {
-        this.tamanho = tamanho;
+    
+    public boolean isLoad(int index){
+        return frames.get(index);
     }
-
-    public int getEndereco() {
-        return endereco;
+    
+    public void load(int index){
+        frames.set(index, true);
     }
-
-    public void setEndereco(int endereco) {
-        this.endereco = endereco;
+    
+    public void unload(int index){
+        frames.set(index, false);
     }
-
-    public boolean alocarProcesso(Processo p) {
-
-        if (memoriaFisica.size() < this.tamanho + p.getTamProcesso()) {
-            for (int i = 0; i < p.getTamProcesso(); i++) {
-
-                Pagina pagina = new Pagina(tamPagina);
-
-                for (int j = 0; j < this.tamPagina; j++) {
-                    Endereco enderecoPagina = new Endereco(endereco, p.getIdProcesso());
-                    endereco++;
-                }
-
-                memoriaFisica.put(endereco, pagina);
-                p.getPaginas().add(pagina.getId());
+    
+    public int getFrameLivre(){
+        for (int i = 0; i < frames.size(); i++) {
+            if (!isLoad(i)) {
+                return i;
             }
-            return true;
-        } else {
-            return false;
         }
+        return -1;
     }
 }
