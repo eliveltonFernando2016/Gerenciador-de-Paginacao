@@ -265,7 +265,7 @@ public class Principal extends javax.swing.JFrame {
         DefaultListModel listModel = new DefaultListModel();
 
         for(int i=0; i < listaEndereco.size(); i++){
-            listModel.addElement("- "+listaEndereco.get(i).toString());
+            listModel.addElement(listaEndereco.get(i).toString());
             listaProcesso.setModel(listModel);
         }
     }//GEN-LAST:event_botaoArquivoActionPerformed
